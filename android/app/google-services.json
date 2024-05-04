@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "744432325876",
+    "project_id": "hotel-bcd4a",
+    "storage_bucket": "hotel-bcd4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744432325876:android:b33e8b5bdec65c4e99faa1",
+        "android_client_info": {
+          "package_name": "com.example.hotel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7YdPtUjIPDfLFwo2bQ2BFtdkxRKp0h_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
