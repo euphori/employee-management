@@ -11,7 +11,8 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Admin Dashboard"),
       ),
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           StreamBuilder<List<UserModel>>(
@@ -39,14 +40,71 @@ class HomePage extends StatelessWidget {
                       ),
                       trailing: GestureDetector(
                         onTap: () {
-                          // WIP
-                          // Butangi nyo lang di pop-up nga may textfield
-                          _updateData(UserModel(
-                              id: employee.id,
-                              name: "EDITED NAME",
-                              position: "NEW POSITION",
-                              contact_info: "NEW CONTACT INFO",
-                              department: "NEW DEPARTMENT"));
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              String newName = "";
+                              String newPosition = "";
+                              String newContactInfo = "";
+                              String newDepartment = "";
+
+                              return AlertDialog(
+                                title: Text('Add Employee'),
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        decoration: InputDecoration(labelText: 'Name'),
+                                        onChanged: (value) {
+                                          newName = value;
+                                        },
+                                      ),
+                                      TextField(
+                                        decoration: InputDecoration(labelText: 'Position'),
+                                        onChanged: (value) {
+                                          newPosition = value;
+                                        },
+                                      ),
+                                      TextField(
+                                        decoration: InputDecoration(labelText: 'Contact Info'),
+                                        onChanged: (value) {
+                                          newContactInfo = value;
+                                        },
+                                      ),
+                                      TextField(
+                                        decoration: InputDecoration(labelText: 'Department'),
+                                        onChanged: (value) {
+                                          newDepartment = value;
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: (){
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Cancel'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      _updateData(UserModel(
+                                        id: employee.id,
+                                        name: newName,
+                                        position: newPosition,
+                                        contact_info: newContactInfo,
+                                        department: newDepartment,
+                                      ));
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Okay'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                         child: Icon(Icons.update),
                       ),
@@ -98,6 +156,7 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
+    ),
     );
   }
 
