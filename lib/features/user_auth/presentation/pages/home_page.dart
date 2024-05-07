@@ -13,150 +13,156 @@ class HomePage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          StreamBuilder<List<UserModel>>(
-              stream: _readData(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                if (snapshot.data!.isEmpty) {
-                  return Center(
-                    child: Text("No Data"),
-                  );
-                }
-                final employees = snapshot.data;
-                return Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Column(
-                      children: employees!.map((employee) {
-                    return ListTile(
-                      leading: GestureDetector(
-                        onTap: () {
-                          _deleteData(employee.id!);
-                        },
-                        child: Icon(Icons.delete),
-                      ),
-                      trailing: GestureDetector(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              String newName = "";
-                              String newPosition = "";
-                              String newContactInfo = "";
-                              String newDepartment = "";
-
-                              return AlertDialog(
-                                title: Text('Add Employee'),
-                                content: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      TextField(
-                                        decoration: InputDecoration(labelText: 'Name'),
-                                        onChanged: (value) {
-                                          newName = value;
-                                        },
-                                      ),
-                                      TextField(
-                                        decoration: InputDecoration(labelText: 'Position'),
-                                        onChanged: (value) {
-                                          newPosition = value;
-                                        },
-                                      ),
-                                      TextField(
-                                        decoration: InputDecoration(labelText: 'Contact Info'),
-                                        onChanged: (value) {
-                                          newContactInfo = value;
-                                        },
-                                      ),
-                                      TextField(
-                                        decoration: InputDecoration(labelText: 'Department'),
-                                        onChanged: (value) {
-                                          newDepartment = value;
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: (){
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('Cancel'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      _updateData(UserModel(
-                                        id: employee.id,
-                                        name: newName,
-                                        position: newPosition,
-                                        contact_info: newContactInfo,
-                                        department: newDepartment,
-                                      ));
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('Okay'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        child: Icon(Icons.update),
-                      ),
-                      title: Text("Name: " + employee.name!),
-                      subtitle: Text("Position: " +
-                          employee.position! +
-                          "\nContact Info: " +
-                          employee.contact_info! +
-                          "\nDepartment: " +
-                          employee.department!),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            StreamBuilder<List<UserModel>>(
+                stream: _readData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.data!.isEmpty) {
+                    return Center(
+                      child: Text("No Data"),
                     );
-                  }).toList()),
-                );
-              }),
-          SizedBox(
-            height: 30,
-          ),
-          GestureDetector(
-            onTap: () {
-              _createData(UserModel(
-                  name: "Erin",
-                  position: "Chef",
-                  contact_info: "1",
-                  department: "CET"));
-            },
-            child: Container(
-              height: 45,
-              width: 100,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-              child: Center(child: Text("Add Employee")),
+                  }
+                  final employees = snapshot.data;
+                  return Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Column(
+                        children: employees!.map((employee) {
+                      return ListTile(
+                        leading: GestureDetector(
+                          onTap: () {
+                            _deleteData(employee.id!);
+                          },
+                          child: Icon(Icons.delete),
+                        ),
+                        trailing: GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                String newName = "";
+                                String newPosition = "";
+                                String newContactInfo = "";
+                                String newDepartment = "";
+
+                                return AlertDialog(
+                                  title: Text('Add Employee'),
+                                  content: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'Name'),
+                                          onChanged: (value) {
+                                            newName = value;
+                                          },
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'Position'),
+                                          onChanged: (value) {
+                                            newPosition = value;
+                                          },
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'Contact Info'),
+                                          onChanged: (value) {
+                                            newContactInfo = value;
+                                          },
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'Department'),
+                                          onChanged: (value) {
+                                            newDepartment = value;
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        _updateData(UserModel(
+                                          id: employee.id,
+                                          name: newName,
+                                          position: newPosition,
+                                          contact_info: newContactInfo,
+                                          department: newDepartment,
+                                        ));
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Okay'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: Icon(Icons.update),
+                        ),
+                        title: Text("Name: " + employee.name!),
+                        subtitle: Text("Position: " +
+                            employee.position! +
+                            "\nContact Info: " +
+                            employee.contact_info! +
+                            "\nDepartment: " +
+                            employee.department!),
+                      );
+                    }).toList()),
+                  );
+                }),
+            SizedBox(
+              height: 30,
             ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          GestureDetector(
-            onTap: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.pushNamed(context, "/login");
-            },
-            child: Container(
-              height: 45,
-              width: 100,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-              child: Center(child: Text("Sign Out")),
+            GestureDetector(
+              onTap: () {
+                _createData(UserModel(
+                    name: "Erin",
+                    position: "Chef",
+                    contact_info: "1",
+                    department: "CET"));
+              },
+              child: Container(
+                height: 45,
+                width: 100,
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Center(child: Text("Add Employee")),
+              ),
             ),
-          )
-        ],
+            SizedBox(
+              height: 30,
+            ),
+            GestureDetector(
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, "/login");
+              },
+              child: Container(
+                height: 45,
+                width: 100,
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Center(child: Text("Sign Out")),
+              ),
+            )
+          ],
+        ),
       ),
-    ),
     );
   }
 
