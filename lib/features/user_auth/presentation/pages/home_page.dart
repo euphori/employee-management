@@ -128,21 +128,82 @@ class HomePage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                _createData(UserModel(
-                    name: "Erin",
-                    position: "Chef",
-                    contact_info: "1",
-                    department: "CET"));
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    String newName = "";
+                    String newPosition = "";
+                    String newContactInfo = "";
+                    String newDepartment = "";
+            
+                    return AlertDialog(
+                      title: Text('Add Employee'),
+                      content: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField(
+                              decoration: InputDecoration(labelText: 'Name'),
+                              onChanged: (value) {
+                                newName = value;
+                              },
+                            ),
+                            TextField(
+                              decoration: InputDecoration(labelText: 'Position'),
+                              onChanged: (value) {
+                                newPosition = value;
+                              },
+                            ),
+                            TextField(
+                              decoration: InputDecoration(labelText: 'Contact Info'),
+                              onChanged: (value) {
+                                newContactInfo = value;
+                              },
+                            ),
+                            TextField(
+                              decoration: InputDecoration(labelText: 'Department'),
+                              onChanged: (value) {
+                                newDepartment = value;
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            _createData(UserModel(
+                              name: newName,
+                              position: newPosition,
+                              contact_info: newContactInfo,
+                              department: newDepartment,
+                            ));
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Okay'),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               child: Container(
                 height: 45,
                 width: 100,
                 decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10)),
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: Center(child: Text("Add Employee")),
               ),
             ),
+
             SizedBox(
               height: 30,
             ),
