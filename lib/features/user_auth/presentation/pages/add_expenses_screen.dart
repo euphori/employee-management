@@ -36,15 +36,16 @@ class _AddPlannerScreenState extends State<AddExpensesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Expenses'),
+        title: Text('Add Expenses', style: TextStyle(color: Colors.white)),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context); // Navigate back when the back button is pressed
+            Navigator.pop(context);
           },
         ),
+        backgroundColor: Color.fromARGB(255, 20, 20, 20),
       ),
-      backgroundColor: Colors.black, // Set the background color of the entire screen
+      backgroundColor: Color.fromARGB(255, 20, 20, 20), // Set the background color of the entire screen
       body: SingleChildScrollView(
       child: Stack(
         children: [

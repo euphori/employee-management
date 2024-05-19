@@ -73,7 +73,7 @@ class EditBudgetScreen extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.all(16), // Internal padding of the container
-                        height: 148,
+                        height: 145,
                         width: 298,
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 233, 233, 233),
@@ -82,65 +82,11 @@ class EditBudgetScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(Icons.house),
-                                    SizedBox(width: 8),
-                                    Text('Housing'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.edit),
-                                    SizedBox(width: 8),
-                                    Text('P2,000'),
-                                  ],
-                                ),
-                              ],
-                            ),
+                            buildBudgetItem('Housing', 'P2,000'),
                             SizedBox(height: 8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(Icons.fastfood),
-                                    SizedBox(width: 8),
-                                    Text('Food'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.edit),
-                                    SizedBox(width: 8),
-                                    Text('P1,000'),
-                                  ],
-                                ),
-                              ],
-                            ),
+                            buildBudgetItem('Food', 'P1,000'),
                             SizedBox(height: 8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(Icons.book),
-                                    SizedBox(width: 8),
-                                    Text('Education'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.edit),
-                                    SizedBox(width: 8),
-                                    Text('P3,000'),
-                                  ],
-                                ),
-                              ],
-                            ),
+                            buildBudgetItem('Education', 'P3,000'),
                           ],
                         ),
                       ),
@@ -164,7 +110,7 @@ class EditBudgetScreen extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.all(16), // Internal padding of the container
-                        height: 148,
+                        height: 145,
                         width: 298,
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 233, 233, 233),
@@ -173,65 +119,11 @@ class EditBudgetScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(Icons.house),
-                                    SizedBox(width: 8),
-                                    Text('Housing'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.edit),
-                                    SizedBox(width: 8),
-                                    Text('P2,000'),
-                                  ],
-                                ),
-                              ],
-                            ),
+                            buildBudgetItem('Housing', 'P2,000'),
                             SizedBox(height: 8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(Icons.fastfood),
-                                    SizedBox(width: 8),
-                                    Text('Food'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.edit),
-                                    SizedBox(width: 8),
-                                    Text('P1,000'),
-                                  ],
-                                ),
-                              ],
-                            ),
+                            buildBudgetItem('Food', 'P1,000'),
                             SizedBox(height: 8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(Icons.book),
-                                    SizedBox(width: 8),
-                                    Text('Education'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.edit),
-                                    SizedBox(width: 8),
-                                    Text('P3,000'),
-                                  ],
-                                ),
-                              ],
-                            ),
+                            buildBudgetItem('Education', 'P3,000'),
                           ],
                         ),
                       ),
@@ -243,6 +135,27 @@ class EditBudgetScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildBudgetItem(String title, String value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Icon(Icons.house),
+            SizedBox(width: 8),
+            Text(title),
+          ],
+        ),
+        Row(
+          children: [
+            SizedBox(width: 8),
+            Text(value),
+          ],
+        ),
+      ],
     );
   }
 }
