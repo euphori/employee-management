@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("FinanceZ")
       ),
-      backgroundColor: Colors.black54,
+      backgroundColor: Color.fromARGB(255, 20, 20, 20),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
