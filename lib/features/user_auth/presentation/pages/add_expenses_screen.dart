@@ -15,9 +15,9 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Expenses'),
+        title: const Text('Add Expenses'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context); // Navigate back when the back button is pressed
           },
@@ -28,13 +28,13 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Center(),
-            SizedBox(height: 20),
+            const Center(),
+            const SizedBox(height: 20),
             Container(
               width: 292,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: ShapeDecoration(
-                color: Color(0xFFD9D9D9),
+                color: const Color(0xFFD9D9D9),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -42,7 +42,7 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Add Expenses',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -54,7 +54,7 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                       letterSpacing: -0.90,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Container(
                     width: 223,
                     height: 29,
@@ -81,8 +81,8 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                                   bottom: 1.83,
                                 ),
                                 clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(),
-                                child: Icon(Icons.arrow_drop_down, color: Colors.white, size: 11),
+                                decoration: const BoxDecoration(),
+                                child: const Icon(Icons.arrow_drop_down, color: Colors.white, size: 11),
                               ),
                               items: _choices.map((String value) {
                                 return DropdownMenuItem<String>(
@@ -94,7 +94,7 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                                       decoration: ShapeDecoration(
                                         color: Colors.black,
                                         shape: RoundedRectangleBorder(
-                                          side: BorderSide(width: 1, color: Colors.white),
+                                          side: const BorderSide(width: 1, color: Colors.white),
                                           borderRadius: BorderRadius.circular(11),
                                         ),
                                       ),
@@ -102,7 +102,7 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                                         child: Text(
                                           value,
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 9,
                                             fontFamily: 'Inter',
@@ -127,7 +127,7 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Container(
                     width: 223,
                     height: 29,
@@ -140,7 +140,7 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                     child: TextField(
                       controller: _amountController,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12,
                         fontFamily: 'Inter',
@@ -148,7 +148,7 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                         height: 1,
                         letterSpacing: -0.72,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Enter Amount',
                         hintStyle: TextStyle(
                           color: Colors.white,
@@ -163,18 +163,15 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                        ),
                         onPressed: () {
                           // Implement save functionality
                         },
-                        child: Text(
+                        child: const Text(
                           'Save',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -188,13 +185,10 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                         ),
                       ),
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                        ),
                         onPressed: () {
                           // Implement cancel functionality
                         },
-                        child: Text(
+                        child: const Text(
                           'Cancel',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -209,7 +203,7 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Container(
                     width: 11,
                     height: 11,
@@ -220,7 +214,7 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                       bottom: 1.83,
                     ),
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                   ),
                 ],
               ),
