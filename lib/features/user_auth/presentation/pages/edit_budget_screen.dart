@@ -3,19 +3,20 @@ import 'package:flutter/material.dart';
 class EditBudgetScreen extends StatelessWidget {
   final double whiteHeightRatio;
 
-  EditBudgetScreen({this.whiteHeightRatio = 0.8});
+  EditBudgetScreen({this.whiteHeightRatio = 0.85});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Budget'),
+        title: Text('Edit Budget', style: TextStyle(color: Colors.white)),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
+        backgroundColor: Color.fromARGB(255, 20, 20, 20),
       ),
       backgroundColor: Colors.transparent, // Make scaffold background transparent to show the gradient
       body: Container(

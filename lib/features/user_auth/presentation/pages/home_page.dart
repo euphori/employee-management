@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hotel/features/user_auth/presentation/pages/add_expenses_screen.dart';
 import 'package:hotel/features/user_auth/presentation/pages/add_planner_screen.dart';
 import 'package:hotel/features/user_auth/presentation/pages/edit_budget_screen.dart';
@@ -13,31 +14,33 @@ class HomePage extends StatelessWidget {
     String formattedDate = DateFormat('MMM yyyy').format(now);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("FinanceZ")),
-      backgroundColor: Colors.black54,
+      // appBar: AppBar(title: const Text("FinanceZ")),
+      backgroundColor: const Color.fromARGB(255, 20, 20, 20),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              height: 300,
-              width: 357,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    spreadRadius: -1,
-                    blurRadius: 7.5,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 50), // adjust the value as needed
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                height: 300,
+                width: 357,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      spreadRadius: -1,
+                      blurRadius: 7.5,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                   Row(
                     children: [
                       const Text(
@@ -103,6 +106,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
+            ),
             Center(
               child: Column(
                 children: [
@@ -119,6 +123,7 @@ class HomePage extends StatelessWidget {
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 10,
+                            color:Colors.white
                           ),
                         ),
                       ),
@@ -162,6 +167,7 @@ class HomePage extends StatelessWidget {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   fontSize: 10,
+                                  color:Colors.white
                                 ),
                               ),
                             ),
