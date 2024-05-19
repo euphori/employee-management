@@ -1,26 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hotel/data/models/mixin/query_builder.dart';
 
-class Expense with QueryBuilder<Expense> {
+class Budget with QueryBuilder<Budget> {
   final String? id;
   final String? userId;
-  final String? plannerId;
-  final String? name;
   final num? amount;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  Expense({
+  Budget({
     this.id,
     this.userId,
-    this.plannerId,
-    this.name,
     this.amount,
     this.createdAt,
     this.updatedAt,
   });
 
-  factory Expense.fromJson(Map<String, dynamic> json) {
+  factory Budget.fromJson(Map<String, dynamic> json) {
     if (json['created_at'] != null && json['created_at'] is Timestamp) {
       json['created_at'] = json['created_at'].toDate();
     }
@@ -29,30 +25,44 @@ class Expense with QueryBuilder<Expense> {
       json['updated_at'] = json['updated_at'].toDate();
     }
 
-    return Expense(
+    return Budget(
       id: json['id'],
       userId: json['user_id'],
-      plannerId: json['planner_id'],
-      name: json['name'],
       amount: json['amount'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
     );
   }
 
-  @override
-  String get collectionName => "expenses";
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'user_id': userId,
+      'amount': amount,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+    };
+  }
+
+  Budget copyWith({
+    String? id,
+    String? userId,
+    num? amount,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return Budget(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      amount: amount ?? this.amount,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 
   @override
-  Expense fromJson(Map<String, dynamic> json) => Expense.fromJson(json);
+  String get collectionName => "budgets";
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "user_id": userId,
-        "planner_id": plannerId,
-        "name": name,
-        "amount": amount,
-        "created_at": createdAt,
-        "updated_at": updatedAt,
-      };
+  @override
+  Budget fromJson(Map<String, dynamic> json) => Budget.fromJson(json);
 }

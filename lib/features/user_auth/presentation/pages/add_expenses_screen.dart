@@ -4,8 +4,11 @@ import 'package:table_calendar/table_calendar.dart';
 
 
 class AddExpensesScreen extends StatefulWidget {
+  const AddExpensesScreen({super.key});
+
   @override
-  _AddPlannerScreenState createState() => _AddPlannerScreenState();
+  State<AddExpensesScreen> createState() => _AddExpensesScreenState();
+
 }
 
 class _AddPlannerScreenState extends State<AddExpensesScreen> {

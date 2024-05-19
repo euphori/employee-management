@@ -1,26 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hotel/data/models/mixin/query_builder.dart';
 
-class Expense with QueryBuilder<Expense> {
+class Planner with QueryBuilder<Planner> {
   final String? id;
   final String? userId;
-  final String? plannerId;
   final String? name;
-  final num? amount;
+  final num? totalAmount;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  Expense({
+  Planner({
     this.id,
     this.userId,
-    this.plannerId,
     this.name,
-    this.amount,
+    this.totalAmount,
     this.createdAt,
     this.updatedAt,
   });
 
-  factory Expense.fromJson(Map<String, dynamic> json) {
+  factory Planner.fromJson(Map<String, dynamic> json) {
     if (json['created_at'] != null && json['created_at'] is Timestamp) {
       json['created_at'] = json['created_at'].toDate();
     }
@@ -29,30 +27,28 @@ class Expense with QueryBuilder<Expense> {
       json['updated_at'] = json['updated_at'].toDate();
     }
 
-    return Expense(
+    return Planner(
       id: json['id'],
       userId: json['user_id'],
-      plannerId: json['planner_id'],
       name: json['name'],
-      amount: json['amount'],
+      totalAmount: json['total_amount'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
     );
   }
 
-  @override
-  String get collectionName => "expenses";
-
-  @override
-  Expense fromJson(Map<String, dynamic> json) => Expense.fromJson(json);
-
   Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
-        "planner_id": plannerId,
         "name": name,
-        "amount": amount,
+        "total_amount": totalAmount,
         "created_at": createdAt,
         "updated_at": updatedAt,
       };
+
+  @override
+  String get collectionName => "planner";
+
+  @override
+  Planner fromJson(Map<String, dynamic> json) => Planner.fromJson(json);
 }

@@ -242,15 +242,9 @@ class _EditBudgetScreenState extends State<EditBudgetScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16), // Add left padding to align text with container
-                        child: Text(
-                          'Today',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF333333),
-                          ),
-                        ),
+                      Text(
+                        'Today',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Container(
                         padding: EdgeInsets.all(16), // Internal padding of the container

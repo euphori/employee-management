@@ -8,6 +8,7 @@ import 'package:hotel/domain/repositories/auth_repo.dart';
 import 'package:hotel/domain/repositories/user_repo.dart';
 import 'package:hotel/features/user_auth/presentation/bloc/app/app_bloc.dart';
 import 'package:hotel/features/user_auth/presentation/bloc/auth/auth_cubit.dart';
+import 'package:hotel/features/user_auth/presentation/bloc/user/user_cubit.dart';
 import 'package:hotel/features/user_auth/presentation/pages/startup_page.dart';
 
 Future main() async {
@@ -47,6 +48,11 @@ class MyApp extends StatelessWidget {
           BlocProvider<AppBloc>(create: (context) => AppBloc(authRepo: RepositoryProvider.of<AuthRepo>(context))..add(AppCheckAuth())),
           BlocProvider<AuthCubit>(
               create: (context) => AuthCubit(
+                    authRepo: RepositoryProvider.of<AuthRepo>(context),
+                    userRepo: RepositoryProvider.of<UserRepo>(context),
+                  )),
+          BlocProvider<UserCubit>(
+              create: (context) => UserCubit(
                     authRepo: RepositoryProvider.of<AuthRepo>(context),
                     userRepo: RepositoryProvider.of<UserRepo>(context),
                   )),

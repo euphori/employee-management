@@ -1,9 +1,12 @@
-import 'package:flutter/material.dart';
 import 'dart:ui'; // Import for ImageFilter
 
+import 'package:flutter/material.dart';
+
 class AddPlannerScreen extends StatefulWidget {
+  const AddPlannerScreen({super.key});
+
   @override
-  _AddPlannerScreenState createState() => _AddPlannerScreenState();
+  State<AddPlannerScreen> createState() => _AddPlannerScreenState();
 }
 
 class _AddPlannerScreenState extends State<AddPlannerScreen> {
@@ -36,9 +39,15 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                SizedBox(height: 20),
+                const Center(
+                  child: Text(
+                    'Planner Screen',
+                    style: TextStyle(color: Colors.white), // Set the text color to white for visibility
+                  ),
+                ),
+                const SizedBox(height: 20),
                 Container(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(10),
@@ -46,7 +55,7 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.attach_money_rounded),
                           SizedBox(width: 10),
@@ -60,31 +69,30 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
                         onPressed: () {
                           _showPlannerNameDialog(context);
                         },
-                        child: Icon(Icons.add_circle_rounded),
+                        child: const Icon(Icons.add_circle_rounded),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     children: [
-                      for (var entry in budgets.entries)
-                        _buildItemRow(context, entry.key, entry.value.toString()),
+                      for (var entry in budgets.entries) _buildItemRow(context, entry.key, entry.value.toString()),
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     // Add functionality to save the budget
                   },
-                  child: Text('Save Budget'),
+                  child: const Text('Save Budget'),
                 ),
               ],
             ),
@@ -107,20 +115,20 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
       children: [
         Text(
           title,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         Row(
           children: [
             Text(
               '₱$amount',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             IconButton(
               onPressed: () {
                 _showEditBudgetDialog(context, title, amount);
               },
-              icon: Icon(Icons.edit),
+              icon: const Icon(Icons.edit),
             ),
           ],
         ),
@@ -140,12 +148,12 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
         String newPlannerName = '';
 
         return AlertDialog(
-          title: Text('Enter Planner Name'),
+          title: const Text('Enter Planner Name'),
           content: TextField(
             onChanged: (value) {
               newPlannerName = value;
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Planner Name',
             ),
           ),
@@ -154,13 +162,13 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
               onPressed: () {
                 Navigator.of(context).pop(newPlannerName);
               },
-              icon: Icon(Icons.check),
+              icon: const Icon(Icons.check),
             ),
             IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.close),
+              icon: const Icon(Icons.close),
             ),
           ],
         );
@@ -195,7 +203,7 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
             onChanged: (value) {
               newAmount = value;
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Enter new amount',
             ),
           ),
@@ -204,13 +212,13 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
               onPressed: () {
                 Navigator.of(context).pop(newAmount);
               },
-              icon: Icon(Icons.check),
+              icon: const Icon(Icons.check),
             ),
             IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.close),
+              icon: const Icon(Icons.close),
             ),
           ],
         );
@@ -230,7 +238,7 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: AddPlannerScreen(),
   ));
 }
