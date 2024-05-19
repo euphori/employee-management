@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  final int budget = 1500;
+
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
@@ -41,63 +43,122 @@ class HomePage extends StatelessWidget {
                     children: [
                       const Text(
                         "Weekly Budget",
-                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w700),
                       ),
                       const Spacer(),
                       Text(
                         formattedDate,
-                        style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        "P1,500", // insert lang di ang budget var plis
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 60),
+                      ),
+                      const Text(
+                        "left",
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        "Food",
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w700),
+                      ),
+                      const Spacer(),
+                      Text(
+                        "P0.00",
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        "Travel",
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w700),
+                      ),
+                      const Spacer(),
+                      Text(
+                        "P0.00",
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w700),
                       ),
                     ],
                   ),
                   //insert balance here
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AddExpensesScreen()),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Icon(Icons.add_circle_outline),
-                            SizedBox(width: 3),
-                            Text("Add Expenses"),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          AddExpensesScreen()),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.add_circle_outline),
+                                  SizedBox(width: 3),
+                                  Text("Add Expenses"),
+                                ],
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditBudgetScreen()),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.edit_square),
+                                  SizedBox(width: 8),
+                                  Text("Edit Budget"),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => EditBudgetScreen()),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.edit_square),
-                            SizedBox(width: 8),
-                            Text("Edit Budget"),
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -168,14 +229,17 @@ class HomePage extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => AddPlannerScreen()),
+                                  MaterialPageRoute(
+                                      builder: (context) => AddPlannerScreen()),
                                 );
                               },
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.add_circle_outline), // Plus icon
-                                  SizedBox(width: 8), // Adjust space between icon and text
+                                  SizedBox(
+                                      width:
+                                          8), // Adjust space between icon and text
                                   Text("Add Planner"),
                                 ],
                               ),
@@ -207,8 +271,10 @@ class HomePage extends StatelessWidget {
                         const Row(
                           children: [
                             Icon(
-                              Icons.emoji_food_beverage_rounded, // Replace with the desired icon
-                              color: Colors.black, // Replace with the desired color
+                              Icons
+                                  .emoji_food_beverage_rounded, // Replace with the desired icon
+                              color: Colors
+                                  .black, // Replace with the desired color
                             ),
                             SizedBox(width: 8), // Adjust the spacing as needed
                             Text(
@@ -218,7 +284,8 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                         IconButton(
-                          icon: const Icon(Icons.add), // Replace with the desired icon
+                          icon: const Icon(
+                              Icons.add), // Replace with the desired icon
                           color: Colors.black, // Replace with the desired color
                           onPressed: () {
                             // Add your onPressed code here
