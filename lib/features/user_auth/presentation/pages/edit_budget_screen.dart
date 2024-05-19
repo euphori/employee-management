@@ -19,7 +19,7 @@ class EditBudgetScreen extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(16),
             height: 148,
-            width: 298,
+            width: 307,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class AddExpensesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final DateTime now = DateTime.now();
+    final DateTime today = DateTime(now.year, now.month, now.day);
+
+    final DateTime firstDay = DateTime(now.year - 1, now.month - 6, now.day);
+    final DateTime lastDay = DateTime(now.year + 1, now.month + 6, now.day);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Expenses'),
@@ -53,6 +60,76 @@ class AddExpensesScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TableCalendar(
+                  focusedDay: today,
+                  firstDay: firstDay,
+                  lastDay: lastDay,
+                  headerStyle: HeaderStyle(
+                    titleCentered: true,
+                    formatButtonVisible: false,
+                    leftChevronIcon: Icon(Icons.chevron_left),
+                    rightChevronIcon: Icon(Icons.chevron_right),
+                  ),
+                  calendarFormat: CalendarFormat.month,
+                ),
+              ),
+              SizedBox(height: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Your Container Title',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Add functionality for edit button
+                        },
+                        child: Icon(Icons.edit_square),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:[ 
+                          Text(
+                          'content',
+                          style: TextStyle(color: Colors.black, fontSize: 18),
+                        ),
+                         IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () {
+                            // Add functionality for edit button in row
+                          },
+                        ),
+                      ],
+                      
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

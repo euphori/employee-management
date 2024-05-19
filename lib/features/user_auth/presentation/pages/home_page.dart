@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        //add here balance
+                        //add here amount and categories
                       ),
                       ), 
                     Row(
@@ -125,6 +125,7 @@ class HomePage extends StatelessWidget {
                               ],
                             ),
                           ),
+                          SizedBox(width: 5.5),
                           ElevatedButton(
                             onPressed: (){
                               Navigator.push(
