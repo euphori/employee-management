@@ -26,51 +26,23 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
         ),
       ),
       backgroundColor: Colors.black, // Set the background color of the entire screen
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Center(
-                child: Text(
-                  'Planner Screen',
-                  style: TextStyle(color: Colors.white), // Set the text color to white for visibility
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Center(
+              child: Text(
+                'Planner Screen',
+                style: TextStyle(color: Colors.white), // Set the text color to white for visibility
               ),
-              SizedBox(height: 20),
-              Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.attach_money_rounded),
-                        SizedBox(width: 10),
-                        Text(
-                          'Planner Name',
-                          style: TextStyle(fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Add functionality
-                      },
-                      child: Icon(Icons.add_circle_rounded),
-                      //add_circle_rounded
-                    ),
-                  ],
-                ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(10),
               ),
-<<<<<<< Updated upstream
-            ],
-          ),
-=======
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -121,7 +93,6 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
               child: Text('Save Budget'),
             ),
           ],
->>>>>>> Stashed changes
         ),
       ),
     );
