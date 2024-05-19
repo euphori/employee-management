@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui'; // Import for ImageFilter
 
 class AddPlannerScreen extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
     'Education': 0,
   };
 
+  bool _isDialogOpen = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,74 +29,79 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
         ),
       ),
       backgroundColor: Colors.black, // Set the background color of the entire screen
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Center(
-              child: Text(
-                'Planner Screen',
-                style: TextStyle(color: Colors.white), // Set the text color to white for visibility
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Center(
+                  child: Text(
+                    'Planner Screen',
+                    style: TextStyle(color: Colors.white), // Set the text color to white for visibility
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.attach_money_rounded),
-                      SizedBox(width: 10),
-                      Text(
-                        'Planner Name',
-                        style: TextStyle(fontWeight: FontWeight.w700),
+                      Row(
+                        children: [
+                          Icon(Icons.attach_money_rounded),
+                          SizedBox(width: 10),
+                          Text(
+                            'Planner Name',
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          _showPlannerNameDialog(context);
+                        },
+                        child: Icon(Icons.add_circle_rounded),
                       ),
                     ],
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _showPlannerNameDialog(context).then((value) {
-                        if (value != null) {
-                          setState(() {
-                            plannerName = value;
-                          });
-                        }
-                      });
-                    },
-                    child: Icon(Icons.add_circle_rounded),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ],
+                  child: Column(
+                    children: [
+                      for (var entry in budgets.entries)
+                        _buildItemRow(context, entry.key, entry.value.toString()),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // Add functionality to save the budget
+                  },
+                  child: Text('Save Budget'),
+                ),
+              ],
+            ),
+          ),
+          if (_isDialogOpen)
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), // Apply blur effect
+              child: Container(
+                color: Colors.black.withOpacity(0.5), // Transparent black background
               ),
             ),
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: [
-                  for (var entry in budgets.entries)
-                    _buildItemRow(context, entry.key, entry.value.toString()),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Add functionality to save the budget
-              },
-              child: Text('Save Budget'),
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -115,13 +123,7 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
             SizedBox(width: 10),
             IconButton(
               onPressed: () {
-                _showEditBudgetDialog(context, title, amount).then((newAmount) {
-                  if (newAmount != null) {
-                    setState(() {
-                      budgets[title] = double.parse(newAmount);
-                    });
-                  }
-                });
+                _showEditBudgetDialog(context, title, amount);
               },
               icon: Icon(Icons.edit),
             ),
@@ -131,8 +133,12 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
     );
   }
 
-  Future<String?> _showPlannerNameDialog(BuildContext context) async {
-    return showDialog<String>(
+  Future<void> _showPlannerNameDialog(BuildContext context) async {
+    setState(() {
+      _isDialogOpen = true;
+    });
+
+    String? newPlannerName = await showDialog<String>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
@@ -165,16 +171,29 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
         );
       },
     );
+
+    setState(() {
+      _isDialogOpen = false;
+    });
+
+    if (newPlannerName != null && newPlannerName.isNotEmpty) {
+      setState(() {
+        plannerName = newPlannerName;
+      });
+    }
   }
 
-  Future<String?> _showEditBudgetDialog(
-      BuildContext context, String title, String amount) async {
-    String newAmount = amount;
+  Future<void> _showEditBudgetDialog(BuildContext context, String title, String amount) async {
+    setState(() {
+      _isDialogOpen = true;
+    });
 
-    return showDialog<String>(
+    String? newAmount = await showDialog<String>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
+        String newAmount = amount;
+
         return AlertDialog(
           title: Text('Edit $title Budget'),
           content: TextField(
@@ -202,5 +221,21 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
         );
       },
     );
+
+    setState(() {
+      _isDialogOpen = false;
+    });
+
+    if (newAmount != null && newAmount.isNotEmpty) {
+      setState(() {
+        budgets[title] = double.parse(newAmount);
+      });
+    }
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: AddPlannerScreen(),
+  ));
 }
