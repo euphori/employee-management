@@ -2,13 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel/features/app/splash_screen/splash_screen.dart';
-import 'package:hotel/features/user_auth/presentation/pages/home_page.dart';
-import 'package:hotel/features/user_auth/presentation/pages/login_page.dart';
-import 'package:hotel/features/user_auth/presentation/pages/sign_up_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:hotel/domain/repositories/auth_repo.dart';
+import 'package:hotel/domain/repositories/user_repo.dart';
+import 'package:hotel/features/user_auth/presentation/bloc/app/app_bloc.dart';
+import 'package:hotel/features/user_auth/presentation/bloc/auth/auth_cubit.dart';
+import 'package:hotel/features/user_auth/presentation/pages/startup_page.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: const FirebaseOptions(
@@ -31,17 +37,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Hotel Management',
-      initialRoute: '/',
-      routes: {
-        '/home': (context) => const HomePage(),
-        '/login': (context) => const LoginPage(),
-        '/signup': (context) => const SignUpPage(),
-      },
-      home: const SplashScreen(
-        child: LoginPage(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (_) => AuthRepo()),
+        RepositoryProvider(create: (_) => UserRepo()),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AppBloc>(create: (context) => AppBloc(authRepo: RepositoryProvider.of<AuthRepo>(context))..add(AppCheckAuth())),
+          BlocProvider<AuthCubit>(
+              create: (context) => AuthCubit(
+                    authRepo: RepositoryProvider.of<AuthRepo>(context),
+                    userRepo: RepositoryProvider.of<UserRepo>(context),
+                  )),
+        ],
+        child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Hotel Management',
+          home: StartupPage(),
+        ),
       ),
     );
   }
