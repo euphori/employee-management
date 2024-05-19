@@ -42,9 +42,83 @@ class HomePage extends StatelessWidget {
                         children: employees!.map((employee) {
                       return ListTile(
                         leading: GestureDetector(
+                          onTap: () {
+                            _deleteData(employee.id!);
+                          },
                           child: Icon(Icons.delete),
                         ),
                         trailing: GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                String newName = "";
+                                String newPosition = "";
+                                String newContactInfo = "";
+                                String newDepartment = "";
+
+                                return AlertDialog(
+                                  title: Text('Add Employee'),
+                                  content: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'Name'),
+                                          onChanged: (value) {
+                                            newName = value;
+                                          },
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'Position'),
+                                          onChanged: (value) {
+                                            newPosition = value;
+                                          },
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'Contact Info'),
+                                          onChanged: (value) {
+                                            newContactInfo = value;
+                                          },
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'Department'),
+                                          onChanged: (value) {
+                                            newDepartment = value;
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        _updateData(UserModel(
+                                          id: employee.id,
+                                          name: newName,
+                                          position: newPosition,
+                                          contact_info: newContactInfo,
+                                          department: newDepartment,
+                                        ));
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Okay'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           child: Icon(Icons.update),
                         ),
                         title: Text("Name: " + employee.name!),

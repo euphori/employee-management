@@ -9,10 +9,11 @@ class EditBudgetScreen extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); 
+            Navigator.pop(context);
           },
         ),
       ),
+      backgroundColor: Colors.black, // Set the background color to black
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 50),
         child: Center(
@@ -28,7 +29,7 @@ class EditBudgetScreen extends StatelessWidget {
                   color: Colors.black.withOpacity(0.5),
                   spreadRadius: -1,
                   blurRadius: 7.5,
-                  offset: Offset(0,3), 
+                  offset: Offset(0,3),
                 ),
               ],
             ),
