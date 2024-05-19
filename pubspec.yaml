@@ -18,7 +18,7 @@ dependencies:
   intl: ^0.19.0
   flutter_bloc: ^8.1.5
   icons_launcher: ^2.1.7
-  flutter_native_splash: ^2.4.0
+  flutter_native_splash: ^2.3.10
 
 dev_dependencies:
   flutter_test:
