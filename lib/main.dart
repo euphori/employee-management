@@ -12,17 +12,18 @@ Future main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: const FirebaseOptions(
-            apiKey: "AIzaSyDhy04HiqhjRlUVZqFly7BlwovkoRlRSO4",
-            appId: "1:744432325876:web:f6ae108600bad8f899faa1",
-            messagingSenderId: "744432325876",
-            projectId: "hotel-bcd4a"));
+      apiKey: "AIzaSyDhy04HiqhjRlUVZqFly7BlwovkoRlRSO4",
+      appId: "1:744432325876:web:f6ae108600bad8f899faa1",
+      messagingSenderId: "744432325876",
+      projectId: "hotel-bcd4a",
+    ));
   }
   await Firebase.initializeApp();
   FirebaseFirestore.instance.settings = const Settings(
     persistenceEnabled: true,
   );
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -35,11 +36,11 @@ class MyApp extends StatelessWidget {
       title: 'Hotel Management',
       initialRoute: '/',
       routes: {
-        '/home': (context) => HomePage(),
-        '/login': (context) => LoginPage(),
-        '/signup': (context) => SignUpPage()
+        '/home': (context) => const HomePage(),
+        '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignUpPage(),
       },
-      home: SplashScreen(
+      home: const SplashScreen(
         child: LoginPage(),
       ),
     );
