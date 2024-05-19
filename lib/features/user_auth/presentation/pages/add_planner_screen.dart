@@ -23,15 +23,16 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Planner'),
+        title: Text('Add Planner', style: TextStyle(color: Colors.white)),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context); // Navigate back when the back button is pressed
+            Navigator.pop(context);
           },
         ),
+        backgroundColor: Color.fromARGB(255, 20, 20, 20),
       ),
-      backgroundColor: Colors.black, // Set the background color of the entire screen
+      backgroundColor: Color.fromARGB(255, 20, 20, 20), // Set the background color of the entire screen
       body: Stack(
         children: [
           Padding(

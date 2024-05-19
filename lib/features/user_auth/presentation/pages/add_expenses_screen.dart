@@ -1,231 +1,286 @@
 import 'package:flutter/material.dart';
+import 'dart:ui'; // Import for ImageFilter
+import 'package:table_calendar/table_calendar.dart';
+
 
 class AddExpensesScreen extends StatefulWidget {
   const AddExpensesScreen({super.key});
 
   @override
   State<AddExpensesScreen> createState() => _AddExpensesScreenState();
+
 }
 
-class _AddExpensesScreenState extends State<AddExpensesScreen> {
-  String? _selectedValue;
-  final TextEditingController _amountController = TextEditingController();
+class _AddPlannerScreenState extends State<AddExpensesScreen> {
+  String plannerName = ''; // Variable to store the planner name
+  Map<String, double> budgets = {
+    'Housing': 0,
+    'Food': 0,
+    'Education': 0,
+  };
 
-  final List<String> _choices = ['Housing', 'Travel', 'Food', 'Lifestyle', 'Education', 'Allowance'];
+  bool _isDialogOpen = false;
+  late DateTime _selectedDate;
+  late CalendarFormat _calendarFormat;
+  late Map<DateTime, List<dynamic>> _events;
+  late List<dynamic> _selectedEvents;
+
+  @override
+  void initState() {
+    super.initState();
+    final _selectedDay = DateTime.now();
+    _selectedDate = _selectedDay;
+    _calendarFormat = CalendarFormat.month;
+    _events = {};
+    _selectedEvents = [];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Expenses'),
+        title: Text('Add Expenses', style: TextStyle(color: Colors.white)),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context); // Navigate back when the back button is pressed
+            Navigator.pop(context);
           },
         ),
+        backgroundColor: Color.fromARGB(255, 20, 20, 20),
       ),
-      backgroundColor: Colors.black, // Set the background color of the entire screen
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const Center(),
-            const SizedBox(height: 20),
-            Container(
-              width: 292,
-              padding: const EdgeInsets.all(16),
-              decoration: ShapeDecoration(
-                color: const Color(0xFFD9D9D9),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Add Expenses',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFF4D4D4D),
-                      fontSize: 15,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w600,
-                      height: 1,
-                      // Adjusted height from 0 to 1 for proper text rendering
-                      letterSpacing: -0.90,
-                    ),
+      backgroundColor: Color.fromARGB(255, 20, 20, 20), // Set the background color of the entire screen
+      body: SingleChildScrollView(
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: 223,
-                    height: 29,
-                    decoration: ShapeDecoration(
-                      color: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              value: _selectedValue,
-                              dropdownColor: Colors.black,
-                              // Set dropdown menu background color
-                              icon: Container(
-                                width: 11,
-                                height: 11,
-                                padding: const EdgeInsets.only(
-                                  top: 2.29,
-                                  left: 0.92,
-                                  right: 0.92,
-                                  bottom: 1.83,
-                                ),
-                                clipBehavior: Clip.antiAlias,
-                                decoration: const BoxDecoration(),
-                                child: const Icon(Icons.arrow_drop_down, color: Colors.white, size: 11),
-                              ),
-                              items: _choices.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(
-                                    child: Container(
-                                      width: 94,
-                                      height: 20,
-                                      decoration: ShapeDecoration(
-                                        color: Colors.black,
-                                        shape: RoundedRectangleBorder(
-                                          side: const BorderSide(width: 1, color: Colors.white),
-                                          borderRadius: BorderRadius.circular(11),
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          value,
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 9,
-                                            fontFamily: 'Inter',
-                                            fontWeight: FontWeight.w600,
-                                            height: 0,
-                                            letterSpacing: -0.54,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                              onChanged: (newValue) {
-                                setState(() {
-                                  _selectedValue = newValue;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: 223,
-                    height: 29,
-                    decoration: ShapeDecoration(
-                      color: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                    ),
-                    child: TextField(
-                      controller: _amountController,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                        height: 1,
-                        letterSpacing: -0.72,
-                      ),
-                      decoration: const InputDecoration(
-                        hintText: 'Enter Amount',
-                        hintStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 1,
-                          letterSpacing: -0.72,
-                        ),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(vertical: 6), // Center the text vertically
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          // Implement save functionality
-                        },
-                        child: const Text(
-                          'Save',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFF4D4D4D),
-                            fontSize: 13,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 1,
-                            letterSpacing: -0.78,
+                      Row(
+                        children: [
+                          Icon(Icons.attach_money_rounded),
+                          SizedBox(width: 10),
+                          Text(
+                            'Add Expenses',
+                            style: TextStyle(fontWeight: FontWeight.w700),
                           ),
-                        ),
+                        ],
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          // Implement cancel functionality
+                          //show alertdialogue with title and dropdown box with 6 choices----------
                         },
-                        child: const Text(
-                          'Cancel',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFF4D4D4D),
-                            fontSize: 13,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 1,
-                            letterSpacing: -0.78,
-                          ),
-                        ),
+                        child: Icon(Icons.add_circle_rounded),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: 11,
-                    height: 11,
-                    padding: const EdgeInsets.only(
-                      top: 2.29,
-                      left: 0.92,
-                      right: 0.92,
-                      bottom: 1.83,
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    decoration: const BoxDecoration(),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ],
+                  child: TableCalendar(
+                    firstDay: DateTime.utc(2020, 1, 1),
+                    lastDay: DateTime.utc(2030, 12, 31),
+                    focusedDay: DateTime.now(),
+                    calendarFormat: _calendarFormat,
+                    selectedDayPredicate: (day) {
+                      return isSameDay(_selectedDate, day);
+                    },
+                    onDaySelected: (selectedDay, focusedDay) {
+                      setState(() {
+                        _selectedDate = selectedDay;
+                        _selectedEvents = _events[selectedDay] ?? [];
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(height: 15),
+                Container(
+                    padding: EdgeInsets.all(16),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Today',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600, 
+                        color: Colors.grey[100],
+                      ),
+                    ),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      for (var entry in budgets.entries)
+                        _buildItemRow(context, entry.key, entry.value.toString()),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (_isDialogOpen)
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), 
+              child: Container(
+                color: Colors.black.withOpacity(0.5), 
               ),
             ),
-          ],
-        ),
+         ],
+       ),
       ),
     );
   }
+
+  Widget _buildItemRow(BuildContext context, String title, String amount) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Row(
+          children: [
+            Text(
+              '₱$amount',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(width: 10),
+            IconButton(
+              onPressed: () {
+                _showEditBudgetDialog(context, title, amount);
+              },
+              icon: Icon(Icons.edit),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Future<void> _showExpensesNameDialog(BuildContext context) async {
+    setState(() {
+      _isDialogOpen = true;
+    });
+
+    String? newPlannerName = await showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String newPlannerName = '';
+
+        return AlertDialog(
+          title: Text('Add Expenses'),
+          content: TextField(
+            onChanged: (value) {
+              newPlannerName = value;
+            },
+            decoration: InputDecoration(
+              hintText: 'Planner Name',
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pop(newPlannerName);
+              },
+              icon: Icon(Icons.check),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(Icons.close),
+            ),
+          ],
+        );
+      },
+    );
+
+    setState(() {
+      _isDialogOpen = false;
+    });
+
+    if (newPlannerName != null && newPlannerName.isNotEmpty) {
+      setState(() {
+        plannerName = newPlannerName;
+      });
+    }
+  }
+
+  Future<void> _showEditBudgetDialog(BuildContext context, String title, String amount) async {
+    setState(() {
+      _isDialogOpen = true;
+    });
+
+    String? newAmount = await showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String newAmount = amount;
+
+        return AlertDialog(
+          title: Text('Edit $title Budget'),
+          content: TextField(
+            onChanged: (value) {
+              newAmount = value;
+            },
+            decoration: InputDecoration(
+              hintText: 'Enter new amount',
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pop(newAmount);
+              },
+              icon: Icon(Icons.check),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(Icons.close),
+            ),
+          ],
+        );
+      },
+    );
+
+    setState(() {
+      _isDialogOpen = false;
+    });
+
+    if (newAmount != null && newAmount.isNotEmpty) {
+      setState(() {
+        budgets[title] = double.parse(newAmount);
+      });
+    }
+  }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: AddExpensesScreen(),
+  ));
 }
