@@ -19,6 +19,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("FinanceZ")
       ),
+      backgroundColor: Colors.black54,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +169,11 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    //insert balance here  
+                    Expanded(
+                      child: Container(
+                        //add here balance
+                      ),
+                      ), 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -233,10 +238,11 @@ class HomePage extends StatelessWidget {
                       height: 72,
                       width: 357,
                       child: Text(
-                        "Precious Day Expenses",
+                        "Previous Day Expenses",
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 10,
+                          color: Colors.white,
                           ),
                       ),
                     ),
@@ -261,7 +267,10 @@ class HomePage extends StatelessWidget {
                   child: Text(
                     "No Data", //insert previous day expenses
                     //insert right side, previous date (MM/DD/YYYY)
-                    style: TextStyle(fontWeight: FontWeight.w700),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                      ),
                   ),
                 ),
                 Center(
@@ -280,6 +289,7 @@ class HomePage extends StatelessWidget {
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 10,
+                              color: Colors.white,
                               ),
                             ),
                           ),
@@ -293,9 +303,11 @@ class HomePage extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.add_circle_outline), // Plus icon
-                                SizedBox(width: 8), // Adjust space between icon and text
-                                Text("Add Planner"),
+                                Icon(Icons.add_circle_outline), 
+                                SizedBox(width: 8),
+                                Text("Add Planner",
+                                style: TextStyle(fontSize: 10),
+                                ),
                               ],
                             ),
                           ),
@@ -326,10 +338,10 @@ class HomePage extends StatelessWidget {
                         Row(
                           children: [
                             Icon(
-                              Icons.emoji_food_beverage_rounded, // Replace with the desired icon
-                              color: Colors.black, // Replace with the desired color
+                              Icons.emoji_food_beverage_rounded,
+                              color: Colors.black, 
                             ),
-                            SizedBox(width: 8), // Adjust the spacing as needed
+                            SizedBox(width: 8),
                             Text(
                               "No Data",
                               style: TextStyle(fontWeight: FontWeight.w700),
@@ -337,10 +349,10 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                         IconButton(
-                          icon: Icon(Icons.add), // Replace with the desired icon
-                          color: Colors.black, // Replace with the desired color
+                          icon: Icon(Icons.add), 
+                          color: Colors.black, 
                           onPressed: () {
-                            // Add your onPressed code here
+                            // Add functionality here
                           },
                         ),
                       ],
