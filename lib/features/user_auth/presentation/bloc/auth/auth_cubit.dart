@@ -32,6 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     try {
       await _authRepo.register(email: email, password: password, username: username);
+      await _userRepo.setBudget(userId: _authRepo.currentUser!.uid);
 
       emit(AuthSuccess());
     } on RegisterException catch (e) {

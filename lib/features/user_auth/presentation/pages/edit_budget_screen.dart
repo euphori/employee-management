@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class EditBudgetScreen extends StatelessWidget {
   final double whiteHeightRatio;
 
-  EditBudgetScreen({this.whiteHeightRatio = 0.75});
+  const EditBudgetScreen({super.key, this.whiteHeightRatio = 0.75});
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +56,13 @@ class EditBudgetScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only( top: 50), // Add padding outside the container
+                  padding: EdgeInsets.only(top: 50), // Add padding outside the container
                   child: Column(
                     children: [
-                      Text('Today', style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text(
+                        'Today',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       Container(
                         padding: EdgeInsets.all(16), // Internal padding of the container
                         height: 148,
@@ -78,19 +81,18 @@ class EditBudgetScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Yesterday',
-                         style: TextStyle(fontWeight: FontWeight.bold), ),
-                      
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       Container(
                         padding: EdgeInsets.all(16), // Internal padding of the container
                         height: 148,
                         width: 298,
                         decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       )
                     ],
-                    
                   ),
                 ),
               ],

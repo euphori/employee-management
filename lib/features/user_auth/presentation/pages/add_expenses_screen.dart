@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AddExpensesScreen extends StatefulWidget {
+  const AddExpensesScreen({super.key});
+
   @override
-  _AddExpensesScreenState createState() => _AddExpensesScreenState();
+  State<AddExpensesScreen> createState() => _AddExpensesScreenState();
 }
 
 class _AddExpensesScreenState extends State<AddExpensesScreen> {
@@ -50,7 +52,8 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                       fontSize: 15,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
-                      height: 1, // Adjusted height from 0 to 1 for proper text rendering
+                      height: 1,
+                      // Adjusted height from 0 to 1 for proper text rendering
                       letterSpacing: -0.90,
                     ),
                   ),
@@ -70,7 +73,8 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
                               value: _selectedValue,
-                              dropdownColor: Colors.black, // Set dropdown menu background color
+                              dropdownColor: Colors.black,
+                              // Set dropdown menu background color
                               icon: Container(
                                 width: 11,
                                 height: 11,
