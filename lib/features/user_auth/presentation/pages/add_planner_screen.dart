@@ -20,27 +20,22 @@ class _AddPlannerScreenState extends State<AddPlannerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Planner'),
+        title: Text('Add Planner', style: TextStyle(color: Colors.white)),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context); // Navigate back when the back button is pressed
+            Navigator.pop(context);
           },
         ),
+        backgroundColor: Color.fromARGB(255, 20, 20, 20),
       ),
-      backgroundColor: Colors.black, // Set the background color of the entire screen
+      backgroundColor: Color.fromARGB(255, 20, 20, 20), // Set the background color of the entire screen
       body: Stack(
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                Center(
-                  child: Text(
-                    'Planner Screen',
-                    style: TextStyle(color: Colors.white), // Set the text color to white for visibility
-                  ),
-                ),
                 SizedBox(height: 20),
                 Container(
                   padding: EdgeInsets.all(16),
