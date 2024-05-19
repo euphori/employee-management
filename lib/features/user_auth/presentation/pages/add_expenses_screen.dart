@@ -14,46 +14,48 @@ class AddExpensesScreen extends StatelessWidget {
         ),
       ),
       backgroundColor: Colors.black, // Set the background color of the entire screen
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Center(
-              child: Text(
-                'Add Expenses Screen',
-                style: TextStyle(color: Colors.white), // Set the text color to white for visibility
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Center(
+                child: Text(
+                  'Add Expenses Screen',
+                  style: TextStyle(color: Colors.white), // Set the text color to white for visibility
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10),
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.attach_money_rounded),
+                        SizedBox(width: 10),
+                        Text(
+                          'Add Expenses',
+                          style: TextStyle(fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Add functionality
+                      },
+                      child: Icon(Icons.add_circle_rounded),
+                    ),
+                  ],
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.attach_money_rounded),
-                      SizedBox(width: 10),
-                      Text(
-                        'Add Expenses',
-                        style: TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                    ],
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Add functionality
-                    },
-                    child: Icon(Icons.add_circle_rounded),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

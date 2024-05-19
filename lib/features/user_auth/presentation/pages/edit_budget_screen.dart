@@ -9,13 +9,30 @@ class EditBudgetScreen extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Navigate back when the back button is pressed
+            Navigator.pop(context); 
           },
         ),
       ),
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(vertical: 50),
         child: Center(
-          child: Text('Edit Budget Screen'),
+          child: Container(
+            padding: EdgeInsets.all(16),
+            height: 148,
+            width: 298,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  spreadRadius: -1,
+                  blurRadius: 7.5,
+                  offset: Offset(0,3), 
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
