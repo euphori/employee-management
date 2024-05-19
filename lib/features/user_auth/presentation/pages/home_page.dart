@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text("FinanceZ")),
+      backgroundColor: Colors.black54,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
