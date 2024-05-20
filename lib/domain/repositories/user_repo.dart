@@ -53,7 +53,10 @@ class UserRepo {
     });
 
     await budgetRef.get().then((value) {
-      budget = Budget.fromJson(value.data()!);
+      final data = value.data()!;
+      data['id'] = value.id;
+
+      budget = Budget.fromJson(data);
     });
   }
 
