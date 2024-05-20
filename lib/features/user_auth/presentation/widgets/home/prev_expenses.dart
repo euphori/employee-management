@@ -16,7 +16,6 @@ class PrevExpenses extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 18.0),
         child: BlocBuilder<UserCubit, UserState>(
             bloc: userCubit,
-            buildWhen: (prev, curr) => curr is UserLoadingData || curr is UserLoadedData || curr is UserErrorData,
             builder: (context, state) {
               if (state is UserLoadingData) {
                 return const Center(child: CircularProgressIndicator());

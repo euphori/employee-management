@@ -11,7 +11,6 @@ class BudgetExpenses extends StatelessWidget {
 
     return BlocBuilder<UserCubit, UserState>(
         bloc: userCubit,
-        buildWhen: (prev, curr) => curr is UserLoadingData || curr is UserLoadedData || curr is UserErrorData,
         builder: (context, state) {
           if (state is UserLoadingData) {
             return const Center(child: CircularProgressIndicator());
@@ -21,16 +20,10 @@ class BudgetExpenses extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Text(
-                    "₱ ${userCubit.userRepo.budget!.amount!.toStringAsFixed(2)}",
-                    maxLines: 1,
-                    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 50),
-                  ),
-                  const SizedBox(width: 10),
-                  const Text("left", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
-                ],
+              Text(
+                "₱ ${userCubit.userRepo.budget!.amount!.toStringAsFixed(2)}",
+                maxLines: 1,
+                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 50),
               ),
               (userCubit.userRepo.expenses.isEmpty)
                   ? const Center(

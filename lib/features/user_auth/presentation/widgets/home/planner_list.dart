@@ -11,7 +11,6 @@ class PlannerList extends StatelessWidget {
 
     return BlocBuilder(
         bloc: userCubit,
-        buildWhen: (prev, curr) => curr is UserLoadingData || curr is UserLoadedData || curr is UserErrorData,
         builder: (context, state) {
           if (state is UserLoadingData) {
             return const Center(child: CircularProgressIndicator());

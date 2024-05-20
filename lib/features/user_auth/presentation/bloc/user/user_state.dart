@@ -9,6 +9,12 @@ final class UserLoadingData extends UserState {}
 
 final class UserLoadedData extends UserState {}
 
+final class UserSuccessData extends UserState {
+  final String message;
+
+  UserSuccessData({required this.message});
+}
+
 final class UserErrorData extends UserState {
   final String message;
 

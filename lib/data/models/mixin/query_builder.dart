@@ -109,7 +109,7 @@ mixin QueryBuilder<T> {
 
     data['updated_at'] = Timestamp.now();
 
-    await _firestore.collection(this.collectionName).doc(clause['value']).update(data);
+    await _firestore.collection(this.collectionName).doc(clause['isEqualTo']).update(data);
   }
 
   /// Inserts a new document into the Firestore collection with the given [data].
@@ -142,7 +142,7 @@ mixin QueryBuilder<T> {
       throw Exception('Delete operation only supports equality checks');
     }
 
-    await _firestore.collection(this.collectionName).doc(clause['value']).delete();
+    await _firestore.collection(this.collectionName).doc(clause['isEqualTo']).delete();
   }
 
   /// Adds a where clause to the query for filtering documents.

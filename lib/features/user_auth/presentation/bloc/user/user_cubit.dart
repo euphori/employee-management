@@ -41,4 +41,20 @@ class UserCubit extends Cubit<UserState> {
       emit(UserErrorData(message: error.toString()));
     });
   }
+
+  Future<void> onUpdateBalance({required num amount}) async {
+    emit(UserLoadingData());
+
+    await userRepo.updateBudget(amount: amount).then((value) {
+      emit(UserSuccessData(message: "Balance Updated"));
+    }).catchError((error) {
+      emit(UserErrorData(message: error.toString()));
+    });
+  }
+
+  void onInputBalance({required String amount}) {
+    if (double.tryParse(amount) != null) {
+      userRepo.currBalance = double.parse(amount);
+    }
+  }
 }

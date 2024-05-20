@@ -7,6 +7,8 @@ class UserRepo {
   final Set<Expense> expenses = {};
   final Set<Planner> planners = {};
 
+  late num currBalance = 0.0;
+
   Future<void> fetchData({required String userId}) async {
     final expensesData = await Expense().where('user_id', isEqualTo: userId).get();
     final budgetData = await Budget().where('user_id', isEqualTo: userId).get();
@@ -50,13 +52,13 @@ class UserRepo {
       'amount': 0.0,
     });
 
-    budgetRef.get().then((value) {
+    await budgetRef.get().then((value) {
       budget = Budget.fromJson(value.data()!);
     });
   }
 
-  Future<void> updateBudget({required String userId, required double amount}) async {
-    await budget?.where("user_id", isEqualTo: userId).update({'amount': budget});
+  Future<void> updateBudget({required num amount}) async {
+    await budget?.where('id', isEqualTo: budget!.id).update({'amount': amount});
 
     budget = budget?.copyWith(amount: amount);
   }
